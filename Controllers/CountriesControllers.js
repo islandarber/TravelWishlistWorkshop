@@ -26,29 +26,30 @@ export const getCountryperCode = async (req, res) => {
     if (code.length === 2) {
       const country = await Country.findOne({ alpha2Code: code });
       if (!country) {
-        res.status(404).json({ error: "Country not found" });
+        return res.status(404).json({ error: "Country not found" });
       }
-      res.status(200).json(country);
-    }else if (code.length === 3) {
+      return res.status(200).json(country);
+    } else if (code.length === 3) {
       const country = await Country.findOne({ alpha3Code: code });
       if (!country) {
-        res.status(404).json({ error: "Country not found" });
+        return res.status(404).json({ error: "Country not found" });
       }
-      res.status(200).json(country);
-    }else {
-      res.status(404).json({ error: "Invalid country code" });
+      return res.status(200).json(country);
+    } else {
+      return res.status(404).json({ error: "Invalid country code" });
     }
-
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
+  
 };
 
 
 export const createCountry = async (req, res) => {
-  const { name, alpha2Code, alpha3Code, visited } = req.body;
+  const { name, alpha2Code, alpha3Code } = req.body;
+  console.log(name, alpha2Code, alpha3Code);
   try {
-    const country = await Country.create({ name, alpha2Code, alpha3Code, visited });
+    const country = await Country.create({ name, alpha2Code, alpha3Code });
     res.status(201).json(country);
   } catch (error) {
     res.status(500).json({ error: error.message });
