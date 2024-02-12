@@ -3,14 +3,12 @@ import mongoose from "mongoose";
 const countrySchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
-    unique: true,
+    required: true
   },
   alpha2Code: {
     type: String,
     uppercase: true,
     required: true,
-    unique: true,
     validate: {
       validator: function (value) {
         // Validate against ISO 3166-1 alpha-2 code format
@@ -23,7 +21,6 @@ const countrySchema = new mongoose.Schema({
     type: String,
     uppercase: true,
     required: true,
-    unique: true,
     validate: {
       validator: function (value) {
         // Validate against ISO 3166-1 alpha-3 code format
