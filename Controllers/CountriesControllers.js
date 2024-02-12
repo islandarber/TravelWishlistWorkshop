@@ -4,13 +4,15 @@ export const getCountries = async (req, res) => {
   const {visited} = req.query;
 
   try {
+    let countries;
+
     if (visited) {
-    const countries = await Country.find({ visited: visited });
-    res.status(200).json(countries);
-    }else {
-      const countries = await Country.find();
-      res.status(200).json(countries);
+      countries = await Country.find({ visited: visited }).sort({ name: 1 });
+    } else {
+      countries = await Country.find().sort({ name: 1 });
     }
+
+    res.status(200).json(countries);
 
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -5,8 +5,7 @@ const CountriesRouter = express.Router();
 
 CountriesRouter.get('/', getCountries);
 CountriesRouter.get('/:code', getCountryperCode);
-// CountriesRouter.post('/', createCountry);
-CountriesRouter.post('/add', createCountry);
+CountriesRouter.post('/', createCountry);
 CountriesRouter.put('/:code', modifyCountry);
 CountriesRouter.delete('/:code', deleteCountry);
 
